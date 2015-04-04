@@ -1,28 +1,33 @@
 require 'matrix'
+require 'stopwords'
 
 module Hemingway
   class Corpus
-    attr_reader :corpus
+    attr_reader :original_corpus
     def initialize(document_collection)
       # Massage the document_collection into a more workable form
-      @corpus = {}
-      document_collection.each { |document| @corpus[document.id] = document.text }
+      @original_corpus = {}
+      document_collection.each { |document| @original_corpus[document.id] = document.text }
+      @clean_corpus = {}
+      @original_corpus.each do |key, value|
+        @clean_corpus[key] = clean value
+      end
 
       # Dictionary of term-frequency for each word
       # to avoid unnecessary computations
       @word_tf_doc = {}
 
       # Just the sentences
-      @sentences = @corpus.values.flatten
+      @sentences = @original_corpus.values.flatten
 
       # The number of documents in the corpus
-      @n_docs = @corpus.keys.size
+      @n_docs = @original_corpus.keys.size
     end
 
     def summary(summary_length, threshold=0.2)
-      s = @sentences
+      s = @clean_corpus.values.flatten
       # n is the number of sentences in the total corpus
-      n = @corpus.values.flatten.size
+      n = @clean_corpus.values.flatten.size
 
       # Vector of Similarity Degree for each sentence in the corpus
       degree = Array.new(n) {0.00} 
@@ -53,6 +58,17 @@ module Hemingway
     end
 
     private
+    def clean(sentence_array)
+      # Clean the sentences a bit to avoid unnecessary operations
+      #
+      # Create stopword filter
+      filter = Stopwords::Snowball::Filter.new "en"
+      sentence_array.map do |s| 
+        s = s.downcase
+        filter.filter(s.split).join(" ")
+      end
+    end
+
     def n_docs_including_w(word)
       # Count the number of documents in the corpus containing the word
       # Look for the word in the dictionnary first, calculate if not present
@@ -61,7 +77,7 @@ module Hemingway
         docs = []
 
         # Concanate the each document sentences to make it easier to search
-        @corpus.values.each { |sentences| docs << sentences.join(" ") }
+        @clean_corpus.values.each { |sentences| docs << sentences.join(" ") }
 
         # Here, we user an interpolated string instead of a regex to avoid
         # weird corner cases

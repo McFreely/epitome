@@ -17,13 +17,13 @@ class CorpusTest < Minitest::Test
     refute_empty @document_one.id
     refute_empty @document_two.id
 
-    assert_equal ["cat likes eat pasta.", "wants time."], @document_one.text
-    assert_equal ["like tomato sauce.", "cat prefer pesto sauce."], @document_two.text
+    assert_equal ["The cat likes to eat pasta.", "He wants more each time."], @document_one.text
+    assert_equal ["He doesn't like tomato sauce.", "The cat prefer pesto sauce."], @document_two.text
   end
   
   def test_corpus_generation
-    assert_equal 2, @corpus.corpus.keys.size
-    assert_equal 2, @corpus.corpus.values.size
+    assert_equal 2, @corpus.original_corpus.keys.size
+    assert_equal 2, @corpus.original_corpus.values.size
   end
 
   def test_summary
