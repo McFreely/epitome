@@ -4,7 +4,10 @@ require 'stopwords'
 module Hemingway
   class Corpus
     attr_reader :original_corpus
-    def initialize(document_collection)
+    def initialize(document_collection, lang="en")
+      # lang is the language used to initialize the stopword list
+      @lang = lang
+
       # Massage the document_collection into a more workable form
       @original_corpus = {}
       document_collection.each { |document| @original_corpus[document.id] = document.text }
@@ -22,6 +25,7 @@ module Hemingway
 
       # The number of documents in the corpus
       @n_docs = @original_corpus.keys.size
+      
     end
 
     def summary(summary_length, threshold=0.2)
@@ -62,7 +66,7 @@ module Hemingway
       # Clean the sentences a bit to avoid unnecessary operations
       #
       # Create stopword filter
-      filter = Stopwords::Snowball::Filter.new "en"
+      filter = Stopwords::Snowball::Filter.new @lang 
       sentence_array.map do |s| 
         s = s.downcase
         filter.filter(s.split).join(" ")

@@ -51,6 +51,13 @@ The length is the number of sentences of the final output.
 
 The threshold is a value between 0.1 and 0.3, but 0.2 is considered to give the best results (and thus the default value).
 
+### Stopword option
+When creating the corpus, you can set the language of the stopword list to be used
+```ruby
+@corpus = Hemingway::Corpus.new(document_collection, "fr")
+```
+The default value is english "en".
+You can find more about the stopword filter [here](https://github.com/brenes/stopwords-filter).
 ## Contributing
 
 1. Fork it ( https://github.com/[my-github-username]/hemingway/fork )
