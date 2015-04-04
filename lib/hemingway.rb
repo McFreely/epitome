@@ -1,5 +1,7 @@
 require "hemingway/version"
 
 module Hemingway
-  # Your code goes here...
 end
+
+require "hemingway/document"
+require "hemingway/corpus"
