@@ -1,7 +1,7 @@
 require 'matrix'
 require 'stopwords'
 
-module Hemingway
+module Epitome
   class Corpus
     attr_reader :original_corpus
     def initialize(document_collection, lang="en")

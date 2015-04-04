@@ -1,8 +1,8 @@
 require 'minitest_helper'
 
-class TestHemingway < Minitest::Test
+class TestEpitome < Minitest::Test
   def test_that_it_has_a_version_number
-    refute_nil ::Hemingway::VERSION
+    refute_nil ::Epitome::VERSION
   end
 
   def test_it_does_something_useful

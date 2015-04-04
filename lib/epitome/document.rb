@@ -1,7 +1,7 @@
 require "scalpel"
 require "securerandom"
 
-module Hemingway
+module Epitome
   class Document
     attr_reader :id
     attr_reader :text

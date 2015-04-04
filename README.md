@@ -1,4 +1,4 @@
-# Hemingway
+# Epitome
 
 A small gem to make your text shorter. It's an implementation of the Lexrank algorithm. You can use it on a single text, but lexrank is designed to be used on a collection of texts. But it works the same anyway.
 
@@ -7,7 +7,7 @@ A small gem to make your text shorter. It's an implementation of the Lexrank alg
 Add this line to your application's Gemfile:
 
 ```ruby
-gem 'hemingway'
+gem 'epitome'
 ```
 
 And then execute:
@@ -23,18 +23,18 @@ Or install it yourself as:
 Firstly, you need to create some documents.
 
 ```ruby
-document_one = Hemingway::Document.new("The cat likes catnip. He rolls and rolls")
-document_two = Hemingway::Document.new("The cat plays in front of the dog. The dog is placid.")
+document_one = Epitome::Document.new("The cat likes catnip. He rolls and rolls")
+document_two = Epitome::Document.new("The cat plays in front of the dog. The dog is placid.")
 ```
 
 Then, organize your documents in a corpus
 
 ```ruby
 document_collection = [document_one, document_two]
-@corpus = Hemingway::Corpus.new(document_collection)
+@corpus = Epitome::Corpus.new(document_collection)
 ```
 
-Finally, ask Ernest for a summary
+Finally, output the summary
 ```ruby
 @corpus.summary(length=3)
 ```
@@ -54,7 +54,7 @@ The threshold is a value between 0.1 and 0.3, but 0.2 is considered to give the 
 ### Stopword option
 When creating the corpus, you can set the language of the stopword list to be used
 ```ruby
-@corpus = Hemingway::Corpus.new(document_collection, "fr")
+@corpus = Epitome::Corpus.new(document_collection, "fr")
 ```
 The default value is english "en".
 You can find more about the stopword filter [here](https://github.com/brenes/stopwords-filter).
