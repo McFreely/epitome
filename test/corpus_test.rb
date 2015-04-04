@@ -14,7 +14,6 @@ class CorpusTest < Minitest::Test
   end
 
   def test_document_preparation
-
     refute_empty @document_one.id
     refute_empty @document_two.id
 
@@ -25,5 +24,12 @@ class CorpusTest < Minitest::Test
   def test_corpus_generation
     assert_equal 2, @corpus.corpus.keys.size
     assert_equal 2, @corpus.corpus.values.size
+  end
+
+  def test_summary
+    summary = @corpus.summary(2, 0.2)
+
+    refute_empty summary
+    assert_equal 2, summary.size
   end
 end
