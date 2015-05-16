@@ -16,7 +16,7 @@ And then execute:
 
 Or install it yourself as:
 
-    $ gem install hemingway
+    $ gem install epitome
 
 ## Usage
 
