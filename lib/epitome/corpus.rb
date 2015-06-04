@@ -1,6 +1,5 @@
 require 'matrix'
 require 'stopwords'
-require 'pry'
 
 module Epitome
   class Corpus
