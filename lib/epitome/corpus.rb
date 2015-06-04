@@ -1,5 +1,6 @@
 require 'matrix'
 require 'stopwords'
+require 'pry'
 
 module Epitome
   class Corpus
@@ -95,7 +96,10 @@ module Epitome
     def idf(word)
       # Number of documents in which word appears
       # Inverse Frequency Smooth (as per wikipedia article)
-      Math.log( @n_docs / n_docs_including_w(word) )
+      result = Math.log( @n_docs / n_docs_including_w(word) )
+
+      # Return 1 to avoid words having all the same td_idf by multiplying by 0
+      return result == 0 ? 1.0 : result 
     end
 
     def tf(sentence, word)
