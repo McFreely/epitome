@@ -29,9 +29,8 @@ class CorpusTest < Minitest::Test
   def test_summary
     summary = @corpus.summary(4, 0.2)
 
-    puts summary
     refute_empty summary
-    assert_equal 4, summary.size
+    assert_equal String, summary.class
   end
 
   def test_weight

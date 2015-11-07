@@ -58,7 +58,7 @@ module Epitome
       # Ugly sleight of hand to return a text based on results
       # <Array>Results => <Hash>Results => <String>ResultsText
       h = Hash[@sentences.zip(results)]
-      return h.sort_by {|k, v| v}.reverse.first(summary_length).to_h.keys
+      return h.sort_by {|k, v| v}.reverse.first(summary_length).to_h.keys.join(" ")
     end
 
     private
